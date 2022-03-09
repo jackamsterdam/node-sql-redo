@@ -11,6 +11,7 @@ import errorsHandler from './02-middleware/errors-handler'
 import config from './01-utils/config'
 import ErrorModel from './03-models/error-model';
 import path from 'path';
+import productsController from './06-controllers/products-controller'
 
 const server = express()
 
@@ -21,6 +22,12 @@ server.use(express.json())
 server.use(expressFileUpload());
 
 server.use(logRequests)
+server.use('/api', productsController)
+
+
+
+
+
 
 // Expose index.html from 07-frontend directory:
 const frontEndDir = path.join(__dirname, '07-frontend') // Create full path to frontend 

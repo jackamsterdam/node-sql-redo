@@ -9,9 +9,9 @@ const connection = mysql.createPool({
     database: config.mysql.database
 })
 
-function execute(sql: string, values?: any[]):Promise<string> {
+function execute(sql: string, values?: any[]):Promise<any> {
     // Promisify sql access:
-   return new Promise((resolve, reject) => {
+   return new Promise<any>((resolve, reject) => {  //! why do i need <any>
        // Execute SQL query:
        connection.query(sql, values, (err, result) => {
          if (err) {
@@ -24,4 +24,6 @@ function execute(sql: string, values?: any[]):Promise<string> {
 }
 
 
-export default execute
+export default {
+    execute
+}
