@@ -1,0 +1,51 @@
+
+### Register 201 Created  if you try again though will give 400 username already taken 
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "RestClient",
+  "lastName": "East",
+  "username": "RestClient",
+  "password": "1234"
+}
+###
+
+POST http://localhost:3001/api/auth/login 
+Content-Type: application/json
+
+{
+  "username": "RestClient",
+  "password": "1234"
+}
+
+############errors:
+### 401 Incorrect username or password
+POST http://localhost:3001/api/auth/login 
+Content-Type: application/json
+
+{
+  "username": "RestClient23432424324",
+  "password": "1234"
+}
+
+### 401 Incorrect username or password   important to check with username and only with password
+POST http://localhost:3001/api/auth/login 
+Content-Type: application/json
+
+{
+  "username": "RestClient",
+  "password": "1234324324324324"
+}
+
+
+
+
+### login with sql injection: 
+POST http://localhost:3001/api/auth/login 
+Content-Type: application/json
+
+{
+  "username": "a' OR 1=1 -- ",
+  "password": "doesnt matter"
+}

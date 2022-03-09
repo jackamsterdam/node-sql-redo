@@ -1,0 +1,162 @@
+
+@API_URL = http://localhost:3001/api 
+
+GET {{API_URL}}/products
+
+###
+
+
+
+
+
+
+
+
+### GET OK
+GET http://localhost:3001/api/products
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxNSwiZmlyc3ROYW1lIjoiUmVzdENsaWVudCIsImxhc3ROYW1lIjoiRWFzdCIsInVzZXJuYW1lIjoiUmVzdENsaWVudCJ9LCJpYXQiOjE2NDY3OTcwNjQsImV4cCI6MTY0NjgwNDI2NH0.JEEgUIMoxrOHEE2pjoc83k5q5vwEnmMu7pi-U2HAnUg
+
+########################################################################################
+
+
+### GET one OK
+GET http://localhost:3001/api/products/1
+
+
+### 404 ErrorModel   Resource with id ____________ not found.
+### btw if you try to send a letter  sql will fail (get one has no joi btw
+GET http://localhost:3001/api/products/123412322432432423
+
+########################################################################################
+
+
+### POST 201 Created
+POST http://localhost:3001/api/products
+Content-Type: application/json
+# Authorization: puttoken here  
+
+{
+    "name": "harry",
+    "price": 65,
+    "stock": 35
+}
+
+
+###  400 ErrorModel Bad Request  Joi validation error
+POST http://localhost:3001/api/products
+Content-Type: application/json
+# Authorization: puttoken here 
+
+{
+    "name": "harry",
+    "price": -20,
+    "stock": "not a number"
+}
+
+
+########################################################################################
+
+### PUT OK
+PUT http://localhost:3001/api/products/98
+Content-Type: application/json
+#Authorization:
+
+{
+    "name": "harryupdate",
+    "price": 88,
+    "stock": 9876
+}
+
+
+### 404 ErrorModel   Resource with id ____________ not found.  
+PUT http://localhost:3001/api/products/98789798778
+Content-Type: application/json
+#Authorization:
+
+{
+    "name": "harryupdate",
+    "price": 88,
+    "stock": 9876
+}
+
+###  400 ErrorModel Bad Request  Joi validation error   btw if  you put a letter as id joi stops you
+
+PUT http://localhost:3001/api/products/98
+Content-Type: application/json
+#Authorization:
+
+{
+    "name": "harryupdate",
+    "price": -4,
+    "stock": "some string wher number suppose to be"
+}
+
+
+########################################################################################
+
+### PATCH OK
+PATCH http://localhost:3001/api/products/98
+Content-Type: application/json
+#Authorization:
+
+{   
+    
+     "price": 88
+}
+
+### PATCH OK Part 2
+PATCH http://localhost:3001/api/products/98
+Content-Type: application/json
+#Authorization:
+
+{
+    "name": "partialname",
+    
+    "stock": 12
+}
+
+
+
+
+### 404 ErrorModel   Resource with id ____________ not found. 
+PATCH http://localhost:3001/api/products/98453454353
+Content-Type: application/json
+#Authorization:
+
+{
+    "name": "partialname",
+    
+    "stock": 12
+}
+
+
+###  400 ErrorModel Bad Request  Joi validation error
+PATCH http://localhost:3001/api/products/98
+Content-Type: application/json
+#Authorization:
+
+{
+   
+    
+    "stock":  "some string wher number suppose to be"
+}
+
+
+########################################################################################
+
+DELETE http://localhost:3001/api/products/99
+
+### 404 ErrorModel   Resource with id ____________ not found. 
+DELETE http://localhost:3001/api/products/9943465465465
+
+
+########################################################################################
+
+
+### BONUS 
+
+GET http://localhost:3001/api/products/cheaper-than/60
+
+###
+
+GET http://localhost:3001/api/products/expensive-than/60
