@@ -1,4 +1,5 @@
 
+###btw super important !!! you still log in with these passwords even though in database you see different passwords cause those passwords are hashed!!! so dont get confused with what you see in database cuase with postman and here you still need to enter the short password abcd 1234 !!!!! if you forget this you will have a bad day lol!
 ### Register 201 Created  if you try again though will give 400 username already taken 
 POST http://localhost:3001/api/auth/register
 Content-Type: application/json

@@ -3,6 +3,8 @@ import crypto from 'crypto'
 import jwt from 'jsonwebtoken'  //!not jwt-decode!!! 
 import UserModel from '../03-models/user-model'
 
+
+///////////////////////////////////////////////
 const salt = "MakeThingsGoRight"
 
 function hash(plainText:string):string {
@@ -13,7 +15,10 @@ function hash(plainText:string):string {
 }
 
 
+
+///////////////////////////////////////////////
 const secretKey = "KittensAreCute"
+
 function getNewToken(user:UserModel):string {
    const payload = {user}
 
@@ -22,6 +27,8 @@ function getNewToken(user:UserModel):string {
 
 }
 
+
+///////////////////////////////////////////////
 function verifyToken(authorizationHeader: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
 

@@ -13,6 +13,7 @@ import ErrorModel from './03-models/error-model';
 import path from 'path';
 import productsController from './06-controllers/products-controller'
 import authController from './06-controllers/auth-controller'
+import usersController from './06-controllers/users-controller'
 
 const server = express()
 
@@ -24,6 +25,7 @@ server.use(expressFileUpload());
 
 server.use(logRequests)
 server.use('/api', authController)
+server.use('/api', usersController)
 server.use('/api', productsController)
 
 

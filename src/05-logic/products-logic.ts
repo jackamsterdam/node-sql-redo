@@ -18,7 +18,7 @@ async function getAllProducts():Promise<ProductModel[]> {
   return products 
 }
 
-async function getOneProduct(id: number): Promise<ProductModel> {
+async function getOneProduct(id: number): Promise<ProductModel> {   //BTW this code is used in REACT to get one product and for update edit one product when you want to populate the form!!!!
    const sql = `SELECT 
                   ProductId AS id,
                   ProductName AS name,

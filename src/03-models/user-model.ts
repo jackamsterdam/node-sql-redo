@@ -2,7 +2,8 @@ import Joi from "joi";
 import UserEnum from "./userEnum";
 
 class UserModel {
-    id: number //!string soon
+    // id: number //! should be string 
+    id: string // UUID now its a string to prevent IDOR Attacks we dont want any user searching by a running number. he ccan see sensitive info.
     firstName: string;
     lastName: string;
     username: string;
@@ -18,7 +19,7 @@ class UserModel {
         this.role = user.role
     }
 
-    private static postValidationSchema = Joi.object({
+    private static postValidationSchema = Joi.object({ //!btw this is used as  joi validation for register 400
         id: Joi.forbidden(),
         firstName: Joi.string().required().min(2).max(100),
         lastName: Joi.string().required().min(2).max(100),
@@ -31,9 +32,10 @@ class UserModel {
         const result = UserModel.postValidationSchema.validate(this, {abortEarly: false})
         return result.error?.message
     }
-
+//!this is for editing (updating) the user                   //But this is used for put editing joi validation editing the user! we dont have code to edit update put the user in users logic btw we just have get one user!
     private static putValidationSchema = Joi.object({
-        id: Joi.number().required().integer().positive(),   //! change soon to string()
+        // id: Joi.number().required().integer().positive(),   //! change soon to string()
+        id: Joi.string().required().length(36),   //!  the uuid  
         firstName: Joi.string().required().min(2).max(100),
         lastName: Joi.string().required().min(2).max(100),
         username: Joi.string().required().min(2).max(100),

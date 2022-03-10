@@ -5,7 +5,7 @@ import UserEnum from '../03-models/userEnum'
 import authLogic from '../05-logic/auth-logic'
 
 const router = express.Router() 
-
+//we dont deal with ids here but users-controller does
 
 router.post('/auth/register', async (request: Request, response: Response, next: NextFunction) => {
     try {
