@@ -6,8 +6,8 @@ import ProductModel from '../03-models/product-model'
 import productsLogic from '../05-logic/products-logic'
 
 const router = express.Router()
-
-router.get('/products', verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
+  //add verifyLoggedIn חסימה
+router.get('/products', async (request: Request, response: Response, next: NextFunction) => {
     try {
          const products = await productsLogic.getAllProducts()
          response.json(products)
