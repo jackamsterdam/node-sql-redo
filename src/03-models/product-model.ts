@@ -1,3 +1,4 @@
+import  { UploadedFile } from "express-fileupload";
 import Joi from "joi";
 
 class ProductModel {
@@ -5,6 +6,8 @@ class ProductModel {
     name: string;
     price: number;
     stock: number;
+    imageName: string;
+    image: UploadedFile
     //!add image
 
     constructor(product: ProductModel) {
@@ -12,13 +15,17 @@ class ProductModel {
         this.name = product.name
         this.price = product.price 
         this.stock = product.stock 
+        this.imageName = product.imageName
+        this.image = product.image 
     }
 
     private static postValidationSchema = Joi.object({
         id: Joi.forbidden(),
         name: Joi.string().required().min(2).max(100),
         price: Joi.number().required().min(0).max(1000),
-        stock: Joi.number().required().integer().min(0).max(10000)
+        stock: Joi.number().required().integer().min(0).max(10000),
+        image: Joi.object().optional(),  //object!
+        imageName: Joi.string().optional()
     })
 
     validatePost():string {
@@ -30,7 +37,9 @@ class ProductModel {
         id: Joi.number().required().integer().min(1),
         name: Joi.string().required().min(2).max(100),
         price: Joi.number().required().min(0).max(1000),
-        stock: Joi.number().required().integer().min(0).max(10000)
+        stock: Joi.number().required().integer().min(0).max(10000),
+        image: Joi.object().optional(), 
+        imageName: Joi.string().optional()
     })
 
     validatePut():string {
@@ -42,7 +51,9 @@ class ProductModel {
         id: Joi.number().required().integer().min(1),
         name: Joi.string().optional().min(2).max(100),
         price: Joi.number().optional().min(0).max(1000),
-        stock: Joi.number().optional().integer().min(0).max(10000)
+        stock: Joi.number().optional().integer().min(0).max(10000),
+        image: Joi.object().optional(),
+        imageName: Joi.string().optional()
     })
 
     validatePatch():string {

@@ -29,6 +29,7 @@ router.get('/products/:id', verifyLoggedIn, async (request: Request, response: R
 
 router.post('/products', verifyLoggedIn,async (request: Request, response: Response, next: NextFunction) => {
     try {
+        request.body.image = request.files?.pic 
         const product = new ProductModel(request.body)
         const addedProduct = await productsLogic.addProduct(product)
         response.status(201).json(addedProduct)
@@ -39,6 +40,7 @@ router.post('/products', verifyLoggedIn,async (request: Request, response: Respo
 
 router.put('/products/:id', verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
+        request.body.image = request.files?.pic
         const id = +request.params.id
         request.body.id = id 
         const product = new ProductModel(request.body)
@@ -52,6 +54,7 @@ router.put('/products/:id', verifyLoggedIn, async (request: Request, response: R
 router.patch('/products/:id', verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
         //לחלץ id
+        request.body.image = request.files?.pic
         const id = +request.params.id 
         request.body.id = id 
         const product = new ProductModel(request.body)
@@ -72,10 +75,11 @@ router.delete('/products/:id', verifyAdmin, async (request: Request, response: R
     }
 })
 
-//הנגשת תמונה 
-router.get('/products/images/imageName', async (request: Request, response: Response, next: NextFunction) => {
+//הנגשת תמונה  dont forget :imageName  : and big N 
+router.get('/products/images/:imageName', async (request: Request, response: Response, next: NextFunction) => {
     try {
-        const imageName = request.params.imagename
+   
+        const imageName = request.params.imageName
         const absolutePath = path.join(__dirname, '..', 'assets', 'images', 'products', imageName)
         response.sendFile(absolutePath)
 
